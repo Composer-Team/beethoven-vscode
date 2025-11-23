@@ -1,0 +1,64 @@
+{
+  "name": "beethoven-vscode",
+  "displayName": "Beethoven Hardware-Software Bridge",
+  "description": "Cross-language support for Beethoven accelerator development (Scala/Chisel <-> C++)",
+  "version": "0.1.0",
+  "publisher": "composer-team",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Composer-Team/Composer"
+  },
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Other"
+  ],
+  "activationEvents": [
+    "workspaceContains:**/CMakeLists.txt",
+    "workspaceContains:**/build.sbt",
+    "onLanguage:scala"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "Beethoven",
+      "properties": {
+        "beethoven.autoRegenerate": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically regenerate C++ headers when Scala files are saved"
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "beethoven.regenerateHeaders",
+        "title": "Beethoven: Regenerate C++ Headers"
+      },
+      {
+        "command": "beethoven.refreshTargets",
+        "title": "Beethoven: Refresh CMake Targets"
+      },
+      {
+        "command": "beethoven.showTargets",
+        "title": "Beethoven: Show Discovered Targets"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/node": "^18.x",
+    "@types/vscode": "^1.74.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "typescript": "^5.0.0"
+  }
+}
